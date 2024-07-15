@@ -1,20 +1,38 @@
 pipeline {
     agent any
+    
+    environment {
+        DOCKER_CREDENTIALS_ID = 'ForDocker' // Ensure this matches the ID of your Docker credentials in Jenkins
+        DOCKER_REGISTRY = 'hub.docker.com'
+        IMAGE_NAME = 'shadchoudhary/Testing'
+        IMAGE_TAG = 'first'
+        GIT_REPO = 'git@github.com:Shadal001/story-blog.git'
+    }
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building...'
+                // Checkout the code from Git
+                git url: "${env.GIT_REPO}", branch: 'master'
             }
         }
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Testing...'
+                script {
+                    // Build the Docker image
+                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                }
             }
         }
-        stage('Deploy') {
+        stage('Push Docker Image') {
             steps {
-                echo 'Deploying...'
+                script {
+                    // Log in to Docker registry
+                    docker.withRegistry("https://${DOCKER_REGISTRY}", "${DOCKER_CREDENTIALS_ID}") {
+                        // Push the Docker image
+                        docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
+                    }
+                }
             }
         }
     }
