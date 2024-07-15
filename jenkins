@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_CREDENTIALS_ID = 'ForDocker' // Ensure this matches the ID of your Docker credentials in Jenkins
-        DOCKER_REGISTRY = 'hub.docker.com/u/shadchoudhary' // Correct Docker registry URL format
+        DOCKER_REGISTRY = 'docker.io' // Correct Docker registry URL format
         IMAGE_NAME = 'shadchoudhary/testing'
         IMAGE_TAG = 'first'
         GIT_REPO = 'https://github.com/Shadal001/story-blog.git'
