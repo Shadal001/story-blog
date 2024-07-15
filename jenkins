@@ -33,7 +33,7 @@ pipeline {
                         sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin ${DOCKER_REGISTRY}"
                         
                         // Push the Docker image
-                        docker.withRegistry("${DOCKER_REGISTRY}", "docker") {
+                        docker.withRegistry("${DOCKER_REGISTRY}", "ForDocker") {
                             docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
                         }
                     }
