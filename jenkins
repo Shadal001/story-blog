@@ -6,7 +6,7 @@ pipeline {
         DOCKER_REGISTRY = 'hub.docker.com'
         IMAGE_NAME = 'shadchoudhary/Testing'
         IMAGE_TAG = 'first'
-        GIT_REPO = 'git@github.com:Shadal001/story-blog.git'
+        GIT_REPO = 'https://github.com/Shadal001/story-blog.git'
     }
 
     stages {
