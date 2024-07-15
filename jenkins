@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_CREDENTIALS_ID = 'docker' // Ensure this matches the ID of your Docker credentials in Jenkins
+        DOCKER_CREDENTIALS_ID = 'dockercred' // Ensure this matches the ID of your Docker credentials in Jenkins
         DOCKER_REGISTRY = 'docker.io' // Correct Docker registry URL format
         IMAGE_NAME = 'shadchoudhary/testing'
         IMAGE_TAG = 'first'
