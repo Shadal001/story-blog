@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_CREDENTIALS_ID = 'ForDocker' // Ensure this matches the ID of your Docker credentials in Jenkins
-        DOCKER_REGISTRY = 'hub.docker.com/u/shadchoudhary' // Remove 'https://' from the URL
+        DOCKER_REGISTRY = 'docker.io' // Correct Docker registry URL format
         IMAGE_NAME = 'shadchoudhary/testing'
         IMAGE_TAG = 'first'
         GIT_REPO = 'https://github.com/Shadal001/story-blog.git'
@@ -33,7 +33,9 @@ pipeline {
                         sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin ${DOCKER_REGISTRY}"
                         
                         // Push the Docker image
-                        docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
+                        docker.withRegistry("${DOCKER_REGISTRY}", "docker") {
+                            docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
+                        }
                     }
                 }
             }
