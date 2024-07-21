@@ -32,7 +32,7 @@ pipeline {
                         // Use 'sh' step to run 'docker login --password-stdin'
                         sh "echo \$DOCKER_PASSWORD | docker login --username \$DOCKER_USER --password-stdin ${DOCKER_REGISTRY}"
                         
-                        // Push the Docker image
+                        // Pushing the Docker image
                         docker.withRegistry("${DOCKER_REGISTRY}", DOCKER_CREDENTIALS_ID) {
                             docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
                         }
