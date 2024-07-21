@@ -16,7 +16,7 @@ pipeline {
                 git url: "${env.GIT_REPO}", branch: 'master'
             }
         }
-        stage('Build Docker Image') {
+        stage('Builds Docker Image') {
             steps {
                 script {
                     // Build the Docker image
