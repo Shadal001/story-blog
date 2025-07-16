@@ -1,4 +1,4 @@
-name: Build, Push, and Deploy to EC2 with OIDC
+name: Build, Push, and Deploy to EC2 with OIDC1
 
 on:
   push:
