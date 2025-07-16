@@ -19,6 +19,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+       
+      - name: Debug OIDC token claims
+        run: |
+            echo "Fetching OIDC token for debugging..."
+            TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r '.value')
+            HEADER=$(echo "$TOKEN" | cut -d "." -f1 | base64 -d 2>/dev/null)
+            PAYLOAD=$(echo "$TOKEN" | cut -d "." -f2 | base64 -d 2>/dev/null)
+            echo "=== HEADER ==="
+            echo "$HEADER"
+            echo "=== PAYLOAD ==="
+            echo "$PAYLOAD"
+
 
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v2
