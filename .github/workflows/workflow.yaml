@@ -1,23 +1,28 @@
-name: first-workflow
-on: push
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - master
 
 jobs:
-    first-job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Building
-              env:
-                Name: Docker-username
-              run: |
-                echo ${{env.Name}}
-                sleep 30
+  build-and-push:
+    runs-on: ubuntu-latest
 
+    env:
+      REGISTRY: docker.io
+      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+      IMAGE_TAG: latest
 
-    second-job:
-        needs: first-job
-        runs-on : ubuntu-latest
-        steps:
-            - name: deploying
-              run: |
-                echo "deploying"
-                sleep 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker registry
+        run: echo "${{ secrets.REGISTRY_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t ${{ env.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+
+      - name: Push Docker image
+        run: docker push ${{ env.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
