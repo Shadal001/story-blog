@@ -9,4 +9,7 @@ jobs:
         run: echo "testing"
       
       - name: echoing
-        run: cat ${{secrets.DOCKER_USERNAME}}
+        run: echo "building"
+
+      - name: deploy
+        run: echo "Deployment done"
