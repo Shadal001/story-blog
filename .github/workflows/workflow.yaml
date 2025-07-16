@@ -10,7 +10,9 @@ jobs:
                 echo "bulding"
                 sleep 30
 
+
     second-job:
+        needs: first-job
         runs-on : ubuntu-latest
         steps:
             - name: deploying
