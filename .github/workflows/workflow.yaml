@@ -7,3 +7,6 @@ jobs:
     steps:
       - name: Welcome to first workflow 
         run: echo "testing"
+      
+      - name: echoing
+        run: cat ${{secrets.DOCKER_USERNAME}}
