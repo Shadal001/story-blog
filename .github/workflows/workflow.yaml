@@ -7,12 +7,13 @@ jobs:
         steps:
             - name: Building
             run: |
-                echo "Building"
+                echo "bulding"
                 sleep 30
+
     second-job:
         runs-on : ubuntu-latest
         steps:
             - name: deploying
-            run: |
-                echo "building"
+              run: |
+                echo "deploying"
                 sleep 30
