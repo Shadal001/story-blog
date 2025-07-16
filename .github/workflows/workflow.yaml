@@ -3,7 +3,7 @@ name: Build, Push, and Deploy to EC2 with OIDC
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   id-token: write
