@@ -12,7 +12,6 @@ jobs:
     env:
       REGISTRY: docker.io
       IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
-      IMAGE_TAG: latest
 
     steps:
       - name: Checkout code
@@ -22,7 +21,7 @@ jobs:
         run: echo "${{ secrets.REGISTRY_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -f .github/workflows/dockerfile -t ${{ env.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+        run: docker build -f .github/workflows/dockerfile -t ${{ env.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
         
       - name: Push Docker image
         run: docker push ${{ env.REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
