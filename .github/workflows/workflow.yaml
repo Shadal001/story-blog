@@ -2,15 +2,17 @@ name: first-workflow
 on: push
 
 jobs:
-  first-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Welcome to first workflow 
-        run: |
-            echo "testing"
-             sleep 30 
-      - name: echoing
-        run: echo "building"
-
-      - name: deploy
-        run: echo "Deployment done"
+    first-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Building
+            run: |
+                echo "Building"
+                sleep 30
+    second-job:
+        runs-on : ubuntu-latest
+        steps:
+            - name: deploying
+            run: |
+                echo "building"
+                sleep 30
