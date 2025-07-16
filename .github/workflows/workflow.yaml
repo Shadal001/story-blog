@@ -6,8 +6,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Building
+              env:
+                Name: Docker-username
               run: |
-                echo "bulding"
+                echo ${{env.Name}}
                 sleep 30
 
 
